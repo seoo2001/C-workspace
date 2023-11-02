@@ -3,6 +3,8 @@
         "**/*.exe": true
     },
     "files.associations": {
-        "vector": "cpp"
+        "vector": "cpp",
+        "cmath": "cpp",
+        "complex": "cpp"
     }
 }
