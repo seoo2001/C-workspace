@@ -9,6 +9,7 @@
         "iostream": "cpp",
         "valarray": "cpp",
         "ios": "cpp",
-        "xiosbase": "cpp"
+        "xiosbase": "cpp",
+        "algorithm": "cpp"
     }
 }
