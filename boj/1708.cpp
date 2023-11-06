@@ -17,7 +17,7 @@ ll ccw(const Point &a, const Point &b, const Point &c) {
 }
 
 ll dist(const Point &a, const Point &b) {
-    return sqrt(a.x-b.x)+sqrt(a.y-b.y);
+    return sqrt((a.x-b.x)*(a.x-b.x)+(a.y-b.y)*(a.y-b.y));
 }
 
 bool comp(const Point &a, const Point &b) {
