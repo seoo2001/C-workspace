@@ -20,7 +20,7 @@ ll ccw(const Point &a, const Point &b, const Point &c) {
 }
 
 ll dist(Point a, Point b) {
-    return sqrt(a.x-b.x)+sqrt(a.y-b.y);
+    return sqrt((a.x-b.x)*(a.x-b.x)+(a.y-b.y)*(a.y-b.y));
 }
 
 bool comp(const Point &a, const Point &b) {
@@ -29,27 +29,17 @@ bool comp(const Point &a, const Point &b) {
     return c>0;
 }
 int n;
-stack<int> st;
+int s[10001];
 
 int main() {
     cin >> n;
     sort(p, p+n);
     sort(p+1, p+n, comp);
-    st.push(0);
-    st.push(1);
-    int next = 2;
-    while (next<n) {
-        while (st.size() >= 2) {
-            int first, second;
-            second = st.top();
-            st.pop();
-            first = st.top();
-            if(ccw(p[first], p[second], p[next])>0) {
-                st.push(second);
-                break;
-            }
-        }
-        st.push(next++);
+    s[0] = 0; s[1] = 1;
+    int top = 2;
+    for(int i=2; i<n; i++) {
+        while(top>=2 && ccw(p[i], p[s[top-2]], p[s[top-1]])<=0) top--;
+        s[top++] = i;
     }
     return 0;
 }
