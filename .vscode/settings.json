@@ -11,6 +11,7 @@
         "ios": "cpp",
         "xiosbase": "cpp",
         "algorithm": "cpp",
-        "utility": "cpp"
+        "utility": "cpp",
+        "random": "cpp"
     }
 }
