@@ -12,6 +12,7 @@
         "xiosbase": "cpp",
         "algorithm": "cpp",
         "utility": "cpp",
-        "random": "cpp"
+        "random": "cpp",
+        "stack": "cpp"
     }
 }
