@@ -1,48 +1,57 @@
 #include <bits/stdc++.h>
 using namespace std;
-typedef long long ll;
-int sqrtN;
 
-vector<ll> v;
-vector<ll> comp;
-ll res = 0;
-map<ll, int> compMap;
+int n, m;
+int h, w;
+int arr[1010][1010];
+int vst[1010][1010];
+int dx[4] = {0,1,0,-1};
+int dy[4] = {1,0,-1,0};
 
+void dfs(int x, int y) {
+    if (vst[y][x]) return;
+    vst[y][x] = 1;
+    for(int i=0; i<4; i++) {
+        int nx = x+dx[i], ny = y+dy[i];
+        if (nx<0 || nx>=m || ny<0 || ny>=n) continue;
+        if (vst[ny][nx]==0 && arr[ny][nx]>=arr[y][x]) dfs(nx, ny);
+    }
+}
 
 int main() {
-    ios::sync_with_stdio(0); cin.tie(0);
-    int n; cin >> n;
-    v.resize(n+1);
-    for(int i=1; i<=n; i++) {
-        cin >> v[i];
-        comp.push_back(v[i]);
+    cin >> n >> m;
+    cin >> h >> w;
+    for(int i=0; i<n; i++) {
+        for(int j=0; j<m; j++) cin >> arr[i][j];
     }
-    sort(comp.begin(), comp.end());
-    comp.erase(unique(comp.begin(), comp.end()), comp.end());
-    for(int i=1; i<=n; i++) {
-        ll temp = v[i];
-        auto idx = lower_bound(comp.begin(), comp.end(), v[i]);
-        v[i] = idx - comp.begin() + 1;
-        compMap[temp] = v[i];
+    int k; cin >> k;
+    while(k--) {
+        int r, c; cin >> r >> c;
+        dfs(c-1, r-1);
     }
+    for(int i=0; i<n; i++) for(int j=0; j<m; j++) vst[i][j] = !vst[i][j];
 
-    int q; cin >> q;
-    while(q--) {
-        int qq; cin >> qq;
-        if (qq==1) {
-            int ans = 0;
-            int l, r, k; cin >> l >> r >> k;
-            for(int i=l; i<=r; i++) {
-                if (v[i]==compMap[k]) {
-                    ans += 1;
-                } 
-            }
-            cout << ans << '\n';
-        } else {
-            int l, r; cin >> l >> r;
-            for(int i=l; i<=r; i++) {
-                v[i] = 0;
+    for(int i=0; i<n; i++) {
+        for(int j=1; j<m; j++) {
+            for (int k=1; k<w; k++) {
+                if (j<k) break;
+                if (vst[i][j-k]) break;
+                vst[i][j-k] += vst[i][j];
             }
         }
     }
+    for(int j=0; j<m; j++) {
+        for(int i=1; i<n; i++) {
+            for (int k=1; k<h; k++) {
+                if (i<k) break;
+                if (vst[i-k][j]) break;
+                vst[i-k][j] += vst[i][j];
+            }
+        }
+    }
+    int ans = 0;
+    for(int i=0; i<n-h+1; i++) {
+        for(int j=0; j<m-w+1; j++) if(vst[i][j]==0) ans++;
+    }
+    cout << ans;
 }
