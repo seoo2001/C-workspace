@@ -1,9 +1,9 @@
-#include <bits/stdc++.h>
+#include <iostream>
 using namespace std;
 int n, m;
 
-int tree[2000000];
-bool lazy[2000000];
+int tree[2002000];
+bool lazy[2002000];
 
 int init(int start, int end, int node) {
     if (start==end) return tree[node] = 1;
@@ -44,9 +44,9 @@ void update_range(int start, int end, int node, int left, int right) {
 
 int sum(int start, int end, int node, int left, int right) {
     lazy_update(start, end, node);
+    if (tree[node]==0) return 0;
     if(right<start || end<left) return 0;
     if(left<=start && end<=right) return tree[node];
-    if (tree[node]==0) return 0;
     int mid = (start+end)/2;
     return sum(start,mid,node*2,left,right) + sum(mid+1,end,node*2+1,left,right);
 }
@@ -57,9 +57,10 @@ int main() {
     int ans = 0;
     int temp  = 0;
     n--;
-    init(1, n, 1);
+    if (n>=2) init(1, n, 1);
     while(m--) {
         int s, e; cin >> s >> e;
+        if (n==0) continue;
         e--;
         int need = sum(1, n, 1, s, e);
         temp += 1;
