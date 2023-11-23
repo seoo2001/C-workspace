@@ -13,6 +13,13 @@
         "algorithm": "cpp",
         "utility": "cpp",
         "random": "cpp",
-        "stack": "cpp"
+        "stack": "cpp",
+        "*.tcc": "cpp",
+        "deque": "cpp",
+        "list": "cpp",
+        "string": "cpp",
+        "unordered_map": "cpp",
+        "unordered_set": "cpp",
+        "istream": "cpp"
     }
 }
