@@ -65,7 +65,6 @@ int dijkstra(int start) {
             }
         }
     }
-    printf("start: %d\n", dp[start][start][(1<<n)-1]);
     int ans = 1e9;
     for(int i=0;i<n; i++) {
         cout << dp[i][i][(1<<n)-1] << ' ';
