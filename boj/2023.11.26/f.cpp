@@ -55,7 +55,7 @@ int mst(ll maxk) {
     if (k<=ret && k>=ret-pp) {
         return 2;
     } else if (k>ret) {
-        return 1;
+        return 0;
     } 
     return 1;
 }
