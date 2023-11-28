@@ -1,11 +1,11 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-const int size = 1e5+5;
-vector<int> g[size];
-int depth[size];
-int dp[size][30];
-int visit[size];
+const int MAX = 1e5+5;
+vector<int> g[MAX];
+int depth[MAX];
+int dp[MAX][30];
+int visit[MAX];
 int n;
 
 void dfs(int v, int d) {
